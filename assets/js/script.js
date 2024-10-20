@@ -136,6 +136,12 @@ async function getMedicineName(medicineClassId) {
 
 const storedMedicines = localStorage.getItem('medicines');
 const medicines = storedMedicines ? JSON.parse(storedMedicines) : [];
+const donePrescriptionMenu = document.getElementById('done-prescription-menu');
+const donePrescriptionMenuBtn = document.getElementById('done-prescription-menu-btn');
+
+donePrescriptionMenuBtn.addEventListener('click',()=>{
+donePrescriptionMenu.classList.toggle('hidden');
+})
 
 function renderMedicines() {
     const tbody = document.getElementById('medicine-tbody');
@@ -145,8 +151,13 @@ function renderMedicines() {
         const emptyRow = document.createElement('tr');
         emptyRow.innerHTML = `<td colspan="7" style="text-align: center;">No drugs yet</td>`;
         tbody.appendChild(emptyRow);
+
     } else {
+        
+    document.getElementById('done-prescription').classList.remove('hidden');
+
         medicines.forEach((medicine, index) => {
+
             const row = document.createElement('tr');
 
             row.innerHTML = `
@@ -160,6 +171,7 @@ function renderMedicines() {
             `;
 
             tbody.appendChild(row);
+            
         });
     }
 }
@@ -217,9 +229,4 @@ document.getElementById('add-button').addEventListener('click', (e) => {
 
 });
 
-const donePrescriptionMenu = document.getElementById('done-prescription-menu');
-const donePrescriptionMenuBtn = document.getElementById('done-prescription-menu-btn');
 
-donePrescriptionMenuBtn.addEventListener('click',()=>{
-donePrescriptionMenu.classList.toggle('hidden');
-})
